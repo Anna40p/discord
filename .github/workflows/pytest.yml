@@ -27,5 +27,10 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run tests
+        env:
+          DISCORD_EMAIL: ${{ secrets.DISCORD_EMAIL }}
+          DISCORD_PASSWORD: ${{ secrets.DISCORD_PASSWORD }}
+          CHANNEL_ID: ${{ secrets.CHANNEL_ID }}
+          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
         run: |
           pytest --alluredir=./allure-results
