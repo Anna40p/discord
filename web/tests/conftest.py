@@ -2,13 +2,23 @@ import os
 import pytest
 from dotenv import load_dotenv
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.webdriver.chrome.options import Options
+from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.core.os_manager import ChromeType
+
 from web.pages.login import LoginPage
 from web.pages.channel import ChannelPage
 
 
 @pytest.fixture(scope="session")
 def driver():
-    driver = webdriver.Chrome()
+    options = Options()
+    options.add_argument('--headless')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--window-size=1920x1080')
+    
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()), options=options) 
     yield driver
     driver.quit()
 
