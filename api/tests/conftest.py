@@ -12,4 +12,4 @@ def client():
 
 @pytest.fixture(scope="function", autouse=True)
 def timeout():
-    sleep(2)
+    sleep(5)
