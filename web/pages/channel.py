@@ -129,7 +129,7 @@ class ChannelPage(BasePage):
     def open_message_menu_by_id(self, id: str):
         message = self.wait_for_element(self.message_by_element_id_locator(id=id))
         ActionChains(self.driver).click().move_to_element(message).click().perform()
-        sleep(1)
+        sleep(2)
         message_menu_button = self.wait_for_element(self.message_menu_button_locator())
         message_menu_button.click()
 
@@ -137,10 +137,10 @@ class ChannelPage(BasePage):
         self.open_message_menu_by_id(id)
         edit_message_button = self.wait_for_element(self.edit_message_button_locator())
         ActionChains(self.driver).move_to_element(edit_message_button).perform()
-        sleep(1)
+        sleep(2)
         edit_message_button.click()
         message_input = self.wait_for_element(self.message_input_locator())
-        sleep(1)
+        sleep(2)
         message_input.send_keys(Keys.CONTROL + 'a')
         message_input.send_keys(Keys.BACKSPACE)
         message_input.send_keys(text)
@@ -153,11 +153,12 @@ class ChannelPage(BasePage):
             self.delete_message_button_locator()
         )
         ActionChains(self.driver).move_to_element(delete_message_button).perform()
-        sleep(1)
+        sleep(2)
         delete_message_button.click()
-
+        sleep(2)
         self.wait_for_element(self.delete_message_confirm_button_locator()).click()
-
+        sleep(2)
+    
     def get_message_by_text(self, text: str) -> WebElement:
         return self.wait_for_element(self.message_by_text_locator(text=text))
 
